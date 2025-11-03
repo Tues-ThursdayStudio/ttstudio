@@ -42,7 +42,7 @@
     .badge{position:absolute;top:14px;left:14px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.12);color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.3px}
     .meta{padding:18px 18px 16px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,0));display:flex;flex-direction:column;gap:8px}
     .title{font-weight:800;font-size:18px;margin:2px 0}
-    .rows{display:grid;grid-template-columns:100px 1fr;gap:6px;color:#a7adbb;font-size:13px}
+    .rows{display:grid;grid-template-columns:110px 1fr;gap:6px;color:#a7adbb;font-size:13px}
     .row b{color:#ffffff;font-weight:700}
     .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
     .tag{font-size:11px;font-weight:800;padding:6px 9px;border:1px dashed #262a33;border-radius:999px;color:#a7adbb}
@@ -61,7 +61,15 @@
     /* spacing tweak */
     #about{margin-top:72px}
 
-    /* ==== 촬영 외주 전용 4열 미니 그리드 ==== */
+    /* 강의 카테고리 프로모 패널 */
+    .promo-panel{grid-column:span 12;background:linear-gradient(180deg,#11141a,#10131a);border:1px solid #2b3140;border-radius:16px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .promo-panel .left{display:flex;align-items:center;gap:10px}
+    .promo-badge{font-size:11px;font-weight:800;padding:6px 10px;border:1px solid #3a4152;border-radius:999px;background:#151a23;color:#cfd5e2}
+    .promo-title{font-weight:800}
+    .promo-cta{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid #3a4152;border-radius:10px;background:#151a23;color:#cfe9ff;font-weight:800}
+    .promo-cta:hover{border-color:#7c5cfc}
+
+    /* ==== 예능 촬영 전용 4열 미니 그리드 ==== */
     .client-section{margin:10px 0 24px}
     .client-header{display:flex;align-items:center;gap:8px;margin:0 0 10px;color:#d7d9df}
     .chip-small{font-size:11px;padding:5px 9px;border-radius:999px;border:1px solid #262a33;background:#14171d;color:#a7adbb}
@@ -128,7 +136,7 @@
               <li>서울영상미디어센터 (2018.12 - 2019.01)</li>
               <li>그린웹서비스 (2019.09 - 2020.06)</li>
               <li>머스타드임팩트 (2020.08 - 2023.12)</li>
-              <li>화목스튜디오 (2024.12 - 현재)</li>
+              <li>화목스튜디오 (2024.01 - 현재)</li>
             </ul>
             <b style="display:block;margin-top:10px">학력</b>
             <ul>
@@ -189,7 +197,7 @@
       phone: '+82-2076-8389',
       instagram: '#',
       youtube: '#',
-      categories: ['촬영 외주','강의 영상','행사 스케치','홍보영상','비하인드 영상','아카이빙 영상'],
+      categories: ['예능 촬영','강의','행사 스케치','홍보영상','비하인드 영상','아카이빙 영상'],
       gear: [
         'CAM : Sony FX3, Sony A7M4, Sony A7C, DJI Mavic Air 2',
         'LENS : Sony 16-35mm G F4, Sony 24-70mm F2.8 GM2, Tamron 70-180mm F2.8 G2',
@@ -201,67 +209,74 @@
       ]
     };
 
-    // ====== 2) 작품 목록 ======
+    // ====== 2) 작품 목록 (연도/역할 포함) ======
     const PROJECTS = [
-      // ==== 기존 카테고리들 (생략 없이 유지) ====
-      // 비하인드
-      {title:'연예인 마라톤 풀코스 2시간 45분 54초 최고기록 보유! (배우 권화운 X 런콥)', client:'런콥', category:'비하인드', year:2025, youtubeId:'oEb-jEoyCg4'},
-      {title:'[Behind] BACKSTAGE : Logline CONCERT with CREZL(크레즐) #2', client:'치타컴퍼니 크레즐', category:'비하인드', year:2025, youtubeId:'msLsqqGQsP4'},
-      {title:'[Behind] BACKSTAGE : Logline CONCERT with CREZL(크레즐) #1', client:'치타컴퍼니 크레즐', category:'비하인드', year:2025, youtubeId:'C6i4mv7HsHc'},
-      {title:"[Behind] 'HAKUNAMATA:舵' | Music Video with CREZL(크레즐)", client:'치타컴퍼니 크레즐', category:'비하인드', year:2025, youtubeId:'XDNCNl0KOxo'},
-      {title:"[Behind] 'HAKUNAMATA:舵' | ALBUM COVER with CREZL(크레즐)", client:'치타컴퍼니 크레즐', category:'비하인드', year:2025, youtubeId:'byZTtzc7pp4'},
-      {title:'[Behind] DIVE INTO CREZL(FAN-CONCERT) #2', client:'치타컴퍼니 크레즐', category:'비하인드', year:2024, youtubeId:'hC0NODJaPug'},
-      {title:'[Behind] DIVE INTO CREZL(FAN-CONCERT) #1', client:'치타컴퍼니 크레즐', category:'비하인드', year:2024, youtubeId:'51utwEUL064'},
-      {title:'[Behind] 청주 단독 콘서트 With CREZL', client:'치타컴퍼니 크레즐', category:'비하인드', year:2024, youtubeId:'0y7Lg9dYNt8'},
-      // 행사 스케치
-      {title:'[현장스케치] KT&G 상상플래닛 | PLANET SUMMIT의 현장 속으로', client:'KT&G 상상플래닛', category:'행사 스케치', year:2025, youtubeId:'E6NiNHLP6Yc'},
-      {title:'2024 IMPACT CIRCLE 결과공유회 스케치', client:'임팩트서클', category:'행사 스케치', year:2024, youtubeId:'H3cdZSQarQk'},
-      {title:'임팩트서클이 SOVAC 2023에 참여했습니다', client:'임팩트서클', category:'행사 스케치', year:2023, youtubeId:'iLFYVQDN3_g'},
-      // 홍보영상
-      {title:"‘크레즐’ 유튜브 - Digital Single ‘늦편지’ Lyric Video Teaser", client:'치타컴퍼니 크레즐', category:'홍보영상', year:2024, youtubeId:'18mFpNcxNew'},
-      {title:"경기도교육청 '하이러닝' 홍보영상", client:'경기도교육청', category:'홍보영상', year:2023, youtubeId:'wBOBW8NNn-4'},
-      {title:'디지털 시민교육 경기도교육청이 함께 하겠습니다ㅣ 경기도교육청TV', client:'경기도교육청', category:'홍보영상', year:2023, youtubeId:'MbDToX3MwQ8'},
-      {title:'경기도교육청 광교 신청사에서 새롭게 출발ㅣ 경기도교육청TV', client:'경기도교육청', category:'홍보영상', year:2023, youtubeId:'ndF6rZwg0c8'},
-      // 강의
-      {title:'전 세대 음악심리치료, [피어나]는 다르게 제공합니다 | 피어나 박혜인', client:'KT&G 상상플래닛', category:'강의', year:2025, youtubeId:'10SC73vbmKA'},
-      {title:'수어콘텐츠, [뉴챕터]는 다르게 만듭니다 | 뉴챕터 유동영', client:'KT&G 상상플래닛', category:'강의', year:2025, youtubeId:'EDB_7NpY4a0'},
-      {title:'온가족 안심 숟가락, [세모녀]는 일상과 함께합니다 | 세모녀 이한결', client:'KT&G 상상플래닛', category:'강의', year:2025, youtubeId:'JqelOiRBJEg'},
-      {title:'[2024 현장사례 아카데미] 환경, 순환 경제, 재활용, 옷을 다시 입다?! #다시입다연구소', client:'betterbe enter 베터비엔터', category:'강의', year:2024, youtubeId:'xo5hQ6dNncM'},
-      {title:'[2024 현장사례 아카데미] 사회적 가치로 만들어가는 커뮤니티, #VAKE #베이크 가 추구하는 소셜 임팩트 이야기, #소셜밸류랩', client:'betterbe enter 베터비엔터', category:'강의', year:2024, youtubeId:'W--t4Yw4JDM'},
+      // ==== 비하인드 ====
+      {title:'연예인 마라톤 풀코스 2시간 45분 54초 최고기록 보유! (배우 권화운 X 런콥)', client:'런콥', category:'비하인드', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'oEb-jEoyCg4'},
+      {title:'[Behind] BACKSTAGE : Logline CONCERT with CREZL(크레즐) #2', client:'치타컴퍼니 크레즐', category:'비하인드', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'msLsqqGQsP4'},
+      {title:'[Behind] BACKSTAGE : Logline CONCERT with CREZL(크레즐) #1', client:'치타컴퍼니 크레즐', category:'비하인드', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'C6i4mv7HsHc'},
+      {title:"[Behind] 'HAKUNAMATA:舵' | Music Video with CREZL(크레즐)", client:'치타컴퍼니 크레즐', category:'비하인드', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'XDNCNl0KOxo'},
+      {title:"[Behind] 'HAKUNAMATA:舵' | ALBUM COVER with CREZL(크레즐)", client:'치타컴퍼니 크레즐', category:'비하인드', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'byZTtzc7pp4'},
+      {title:'[Behind] DIVE INTO CREZL(FAN-CONCERT) #2', client:'치타컴퍼니 크레즐', category:'비하인드', year:2024, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'hC0NODJaPug'},
+      {title:'[Behind] DIVE INTO CREZL(FAN-CONCERT) #1', client:'치타컴퍼니 크레즐', category:'비하인드', year:2024, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'51utwEUL064'},
+      {title:'[Behind] 청주 단독 콘서트 With CREZL', client:'치타컴퍼니 크레즐', category:'비하인드', year:2024, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'0y7Lg9dYNt8'},
 
-      // ==== 촬영 외주 (요청 역순 + client별 묶음에 사용) ====
-      {title:'나랑 소개팅 할래 말래! 할래 말래!(feat. 김원훈)ㅣLS그룹 아바타 소개팅 [처음뵙겠습니다 EP.02]', client:'LS그룹', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'Qti2uQSlZB8'},
-      {title:'회사 사람과 아바타 소개팅을 해봤습니다🤭ㅣLS그룹 아바타 소개팅 [처음뵙겠습니다 EP.01]', client:'LS그룹', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'NEm4P0JwgCY'},
-      {title:'사무실이 이렇게 재밌다고요? 😂 연봉 3배 썰부터 FP들의 진짜 속마음 대방출! [건강보장구역 EP.4 성동FP지원단 편]', client:'교보생명', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'2-HHZ69gQJ4'},
-      {title:'📞 네? 한강에서 돼지파티가 열리고 있다구요?? 지금 당장 출동하겠습니다. [건강보장구역 EP.3 노들섬 편]', client:'교보생명', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'k0nwZjly31g'},
-      {title:'사무실에 간식 트롤리? 리얼 허거덩거덩스한 상황‼️ 직장인 건강의 밸런스 절대지켜 👊👊💪 [건강보장구역 EP.2 교보생명 편]', client:'교보생명', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'A52B05L0j0E'},
-      {title:'나만큼 결혼에 진심인 사람 있음 나와보라 그래! 결혼무새 박세미, 드디어 시집 갑니다 ㅣ 소비내역 시그널 EP.2', client:'아이엠뱅크', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'HANxkAAarzk'},
-      {title:'이거 기획한 사람 당장 나와;; 미3누, 30년 인생 최초 헬스장 3대 측정 공개합니다! (일일 PT쌤. 정대진 선수 & 최재상 선수)ㅣ부자 될 MZ들 EP.6', client:'아이엠뱅크', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'IoGNILv8Ci8'},
-      {title:'소비내역 시그널 EP.1 폭스클럽 김지유 소개팅', client:'아이엠뱅크', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'ftSn2BOrLs4'},
-      {title:'EP.3 부자 될 MZ들 ㅣ 저기 내 남친 지나간다. 100만 패션 유튜버 깡스타일리스트와 미미미누의 따라만 해도 여친 생기는 여심저격 남친룩북 공개!', client:'아이엠뱅크', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'GPsrh6DH7WI'},
-      {title:'(CC) 권유리, 스케줄 침범해서 꿀템 털기 (가방, 다이어트, 뷰티, 차)', client:'권유리', agency:'TV조선', category:'촬영 외주', year:2025, youtubeId:'i_TNyoCqwdQ'},
-      {title:'[CC] 권유리, 리터급 바이크를 타보다 "이거 원래 이렇게 불편해?"', client:'권유리', agency:'TV조선', category:'촬영 외주', year:2025, youtubeId:'rndd5OcRDZ0'},
-      {title:'"부릉~🏍️ 면허 따러 가요!" 폭간율 권유리, 2종 소형 면허에 도전하다(engCC)', client:'권유리', agency:'TV조선', category:'촬영 외주', year:2025, youtubeId:'-AWhLsLP_rw'},
-      {title:'✨필수 시청✨ 2종 소형 한 번에 따는 법', client:'권유리', agency:'TV조선', category:'촬영 외주', year:2025, youtubeId:'MsbsI6cYnxQ'},
-      {title:'생건 Ent 주식회사 숏드라마 [ EP 7 ]', client:'LG생활건강', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'zJnwoOV0Zts'},
-      {title:'생건 Ent 주식회사 숏드라마 [ EP 6 ]', client:'LG생활건강', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'FSdF1UsUCrk'},
-      {title:'생건 Ent 주식회사 숏드라마 [ EP 5 ]', client:'LG생활건강', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'2rEDvjDLwvQ'},
-      {title:'생건 Ent 주식회사 숏드라마 [ EP 4 ]', client:'LG생활건강', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'Q7RX2HxG0o8'},
-      {title:'생건 Ent 주식회사 숏드라마 [ EP 3 ]', client:'LG생활건강', agency:'The SMC', category:'촬영 외주', year:2025, youtubeId:'hHyQCuqQ188'},
-      {title:'생건 Ent 주식회사 숏드라마 [ EP 2 ]', client:'LG생활건강', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'VrFoMq7mwBc'},
-      {title:'생건 Ent 주식회사 숏드라마 [ EP 1 ]', client:'LG생활건강', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'rVFAAhDhnIs'},
-      {title:'[현장, 패기슼으로] AI의 내일을 만나보는 시간! SK AI SUMMIT 2024', client:'SK', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'ofJd53aq2sE'},
-      {title:'가을맞이🍂 시크릿 힐링 여행 코스 대. 공. 개✨ | 북한산 체험형 숲속쉼터 | 대우건설', client:'대우건설', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'d9mI0XQXf_0'},
-      {title:'[전국힙할Z도 양양편] 양양 가서 여기 안 가면 손해, 여름보다 핫한 양양 ⛱️', client:'현대해상', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'nCMKJtOt36E'},
-      {title:'[전국힙할Z도 군산편] 치..치지직..응답하라 여기는 군산ㅣMZ가 레트로의 성지 군산을 즐기는 방법📸', client:'현대해상', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'dHHmwihRXGM'},
-      {title:'[전국힙할Z도 춘천편] 나 가을 타나 봐..🍂 춘천에서 힐링 100% 충전하는 법ㅣ 당일치기 춘천 여행코스 6곳', client:'현대해상', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'KPmiYgNAoIQ'},
-      {title:'[금융쏙! 브리핑] 유사투자자문업 정확하게 쏙!쏙! 알아봅시다', client:'금융감독원', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'WjlMVOaRypg'},
-      {title:'금융감독원 2025년 신입직원 온라인 채용설명회 (2편)', client:'금융감독원', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'_kdiRp-YvSc'},
-      {title:'금융감독원 2025년 신입직원 온라인 채용설명회 (1편)', client:'금융감독원', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'-OHKIHFd-TU'},
-      {title:'[굿앤굿 행복육아 공감육아일기 1화] 28개월 아기와 함께하는 초보 엄마의 육아 성장 스토리🧡', client:'현대해상', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'DCvNSbDtEK8'},
-      {title:'[덕심 튜토리얼 빵편] 🍞 빵덕후들의 맛있는 토크😋 빵지순례 썰부터 빵 시식까지', client:'현대해상', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'tJJ669OpnzQ'},
-      {title:'The new E-Class 디젤 vs 가솔린 아옳이의 선택은?ㅣ한성 드라이브 EP.1', client:'한성자동차', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'7tqSNa_qWdc'},
-      {title:'한성자동차 일일 사원이 된 미미미누?!ㅣ엔조이 한성 EP.1', client:'한성자동차', agency:'The SMC', category:'촬영 외주', year:2024, youtubeId:'ZzUkamco5XY'}
+      // ==== 행사 스케치 (추가 2건 포함) ====
+      {title:'[갤럭시 워치8 시리즈] 갤럭시 워치런 @사파리', client:'삼성전자', agency:'제일기획', category:'행사 스케치', year:2025, role:'스케치 촬영감독', youtubeId:'BPopwEEJfVw'},
+      {title:'2025 Run your way SEOUL 10K 레이스', client:'new balance', agency:'제일기획', category:'행사 스케치', year:2025, role:'스케치 촬영감독', link:'https://www.instagram.com/p/DQaUHaBk2nK/'},
+      {title:'[현장스케치] KT&G 상상플래닛 | PLANET SUMMIT의 현장 속으로', client:'KT&G 상상플래닛', category:'행사 스케치', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'E6NiNHLP6Yc'},
+      {title:'2024 IMPACT CIRCLE 결과공유회 스케치', client:'임팩트서클', category:'행사 스케치', year:2024, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'H3cdZSQarQk'},
+      {title:'임팩트서클이 SOVAC 2023에 참여했습니다', client:'임팩트서클', category:'행사 스케치', year:2023, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'iLFYVQDN3_g'},
+
+      // ==== 홍보영상 ====
+      {title:"‘크레즐’ 유튜브 - Digital Single ‘늦편지’ Lyric Video Teaser", client:'치타컴퍼니 크레즐', category:'홍보영상', year:2024, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'18mFpNcxNew'},
+      {title:"경기도교육청 '하이러닝' 홍보영상", client:'경기도교육청', category:'홍보영상', year:2023, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'wBOBW8NNn-4'},
+      {title:'디지털 시민교육 경기도교육청이 함께 하겠습니다ㅣ 경기도교육청TV', client:'경기도교육청', category:'홍보영상', year:2023, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'MbDToX3MwQ8'},
+      {title:'경기도교육청 광교 신청사에서 새롭게 출발ㅣ 경기도교육청TV', client:'경기도교육청', category:'홍보영상', year:2023, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'ndF6rZwg0c8'},
+
+      // ==== 강의 ====
+      {title:'전 세대 음악심리치료, [피어나]는 다르게 제공합니다 | 피어나 박혜인', client:'KT&G 상상플래닛', category:'강의', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'10SC73vbmKA'},
+      {title:'수어콘텐츠, [뉴챕터]는 다르게 만듭니다 | 뉴챕터 유동영', client:'KT&G 상상플래닛', category:'강의', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'EDB_7NpY4a0'},
+      {title:'온가족 안심 숟가락, [세모녀]는 일상과 함께합니다 | 세모녀 이한결', client:'KT&G 상상플래닛', category:'강의', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'JqelOiRBJEg'},
+      {title:'[2024 현장사례 아카데미] 환경, 순환 경제, 재활용, 옷을 다시 입다?! #다시입다연구소', client:'betterbe enter 베터비엔터', category:'강의', year:2024, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'xo5hQ6dNncM'},
+      {title:'[2024 현장사례 아카데미] 사회적 가치로 만들어가는 커뮤니티, #VAKE #베이크 가 추구하는 소셜 임팩트 이야기, #소셜밸류랩', client:'betterbe enter 베터비엔터', category:'강의', year:2024, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'W--t4Yw4JDM'},
+
+      // ==== 아카이빙 (신규) ====
+      {title:'2025.10.10 창티크 無形 공연 아카이빙', client:'창티크', agency:'ACTO', category:'아카이빙', year:2025, role:'1인 제작(기획, 촬영, 편집)', youtubeId:'hMmL4HpJXr4'},
+
+      // ==== 예능 촬영 (이전 '촬영 외주') ====
+      {title:'나랑 소개팅 할래 말래! 할래 말래!(feat. 김원훈)ㅣLS그룹 아바타 소개팅 [처음뵙겠습니다 EP.02]', client:'LS그룹', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'Qti2uQSlZB8'},
+      {title:'회사 사람과 아바타 소개팅을 해봤습니다🤭ㅣLS그룹 아바타 소개팅 [처음뵙겠습니다 EP.01]', client:'LS그룹', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'NEm4P0JwgCY'},
+      {title:'사무실이 이렇게 재밌다고요? 😂 연봉 3배 썰부터 FP들의 진짜 속마음 대방출! [건강보장구역 EP.4 성동FP지원단 편]', client:'교보생명', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'2-HHZ69gQJ4'},
+      {title:'📞 네? 한강에서 돼지파티가 열리고 있다구요?? 지금 당장 출동하겠습니다. [건강보장구역 EP.3 노들섬 편]', client:'교보생명', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'k0nwZjly31g'},
+      {title:'사무실에 간식 트롤리? 리얼 허거덩거덩스한 상황‼️ 직장인 건강의 밸런스 절대지켜 👊👊💪 [건강보장구역 EP.2 교보생명 편]', client:'교보생명', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'A52B05L0j0E'},
+      {title:'나만큼 결혼에 진심인 사람 있음 나와보라 그래! 결혼무새 박세미, 드디어 시집 갑니다 ㅣ 소비내역 시그널 EP.2', client:'아이엠뱅크', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'HANxkAAarzk'},
+      {title:'이거 기획한 사람 당장 나와;; 미3누, 30년 인생 최초 헬스장 3대 측정 공개합니다! (일일 PT쌤. 정대진 선수 & 최재상 선수)ㅣ부자 될 MZ들 EP.6', client:'아이엠뱅크', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'IoGNILv8Ci8'},
+      {title:'소비내역 시그널 EP.1 폭스클럽 김지유 소개팅', client:'아이엠뱅크', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'ftSn2BOrLs4'},
+      {title:'EP.3 부자 될 MZ들 ㅣ 저기 내 남친 지나간다. 100만 패션 유튜버 깡스타일리스트와 미미미누의 따라만 해도 여친 생기는 여심저격 남친룩북 공개!', client:'아이엠뱅크', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'GPsrh6DH7WI'},
+      {title:'(CC) 권유리, 스케줄 침범해서 꿀템 털기 (가방, 다이어트, 뷰티, 차)', client:'권유리', agency:'TV조선', category:'예능 촬영', year:2025, youtubeId:'i_TNyoCqwdQ'},
+      {title:'[CC] 권유리, 리터급 바이크를 타보다 "이거 원래 이렇게 불편해?"', client:'권유리', agency:'TV조선', category:'예능 촬영', year:2025, youtubeId:'rndd5OcRDZ0'},
+      {title:'"부릉~🏍️ 면허 따러 가요!" 폭간율 권유리, 2종 소형 면허에 도전하다(engCC)', client:'권유리', agency:'TV조선', category:'예능 촬영', year:2025, youtubeId:'-AWhLsLP_rw'},
+      {title:'✨필수 시청✨ 2종 소형 한 번에 따는 법', client:'권유리', agency:'TV조선', category:'예능 촬영', year:2025, youtubeId:'MsbsI6cYnxQ'},
+      {title:'생건 Ent 주식회사 숏드라마 [ EP 7 ]', client:'LG생활건강', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'zJnwoOV0Zts'},
+      {title:'생건 Ent 주식회사 숏드라마 [ EP 6 ]', client:'LG생활건강', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'FSdF1UsUCrk'},
+      {title:'생건 Ent 주식회사 숏드라마 [ EP 5 ]', client:'LG생활건강', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'2rEDvjDLwvQ'},
+      {title:'생건 Ent 주식회사 숏드라마 [ EP 4 ]', client:'LG생활건강', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'Q7RX2HxG0o8'},
+      {title:'생건 Ent 주식회사 숏드라마 [ EP 3 ]', client:'LG생활건강', agency:'The SMC', category:'예능 촬영', year:2025, youtubeId:'hHyQCuqQ188'},
+      {title:'생건 Ent 주식회사 숏드라마 [ EP 2 ]', client:'LG생활건강', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'VrFoMq7mwBc'},
+      {title:'생건 Ent 주식회사 숏드라마 [ EP 1 ]', client:'LG생활건강', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'rVFAAhDhnIs'},
+      {title:'[현장, 패기슼으로] AI의 내일을 만나보는 시간! SK AI SUMMIT 2024', client:'SK', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'ofJd53aq2sE'},
+      {title:'가을맞이🍂 시크릿 힐링 여행 코스 대. 공. 개✨ | 북한산 체험형 숲속쉼터 | 대우건설', client:'대우건설', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'d9mI0XQXf_0'},
+      {title:'[전국힙할Z도 양양편] 양양 가서 여기 안 가면 손해, 여름보다 핫한 양양 ⛱️', client:'현대해상', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'nCMKJtOt36E'},
+      {title:'[전국힙할Z도 군산편] 치..치지직..응답하라 여기는 군산ㅣMZ가 레트로의 성지 군산을 즐기는 방법📸', client:'현대해상', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'dHHmwihRXGM'},
+      {title:'[전국힙할Z도 춘천편] 나 가을 타나 봐..🍂 춘천에서 힐링 100% 충전하는 법ㅣ 당일치기 춘천 여행코스 6곳', client:'현대해상', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'KPmiYgNAoIQ'},
+      {title:'[금융쏙! 브리핑] 유사투자자문업 정확하게 쏙!쏙! 알아봅시다', client:'금융감독원', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'WjlMVOaRypg'},
+      {title:'금융감독원 2025년 신입직원 온라인 채용설명회 (2편)', client:'금융감독원', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'_kdiRp-YvSc'},
+      {title:'금융감독원 2025년 신입직원 온라인 채용설명회 (1편)', client:'금융감독원', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'-OHKIHFd-TU'},
+      {title:'[굿앤굿 행복육아 공감육아일기 1화] 28개월 아기와 함께하는 초보 엄마의 육아 성장 스토리🧡', client:'현대해상', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'DCvNSbDtEK8'},
+      {title:'[덕심 튜토리얼 빵편] 🍞 빵덕후들의 맛있는 토크😋 빵지순례 썰부터 빵 시식까지', client:'현대해상', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'tJJ669OpnzQ'},
+      {title:'The new E-Class 디젤 vs 가솔린 아옳이의 선택은?ㅣ한성 드라이브 EP.1', client:'한성자동차', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'7tqSNa_qWdc'},
+      {title:'한성자동차 일일 사원이 된 미미미누?!ㅣ엔조이 한성 EP.1', client:'한성자동차', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'ZzUkamco5XY'}
     ];
 
     // ====== 3) 렌더링 ======
@@ -269,12 +284,12 @@
     const $$ = (sel, el=document) => [...el.querySelectorAll(sel)];
 
     const CATEGORY_MAP = {
-      '강의 영상':'강의',
+      '강의':'강의',
       '행사 스케치':'행사 스케치',
       '홍보영상':'홍보영상',
       '비하인드 영상':'비하인드',
       '아카이빙 영상':'아카이빙',
-      '촬영 외주':'촬영 외주'
+      '예능 촬영':'예능 촬영'
     };
 
     const state = {filter: null};
@@ -286,7 +301,15 @@
         const btn = document.createElement('button');
         btn.className = 'tab'+(i===0?' active':'');
         btn.textContent = name;
-        btn.onclick = ()=>{ state.filter = name; $$('.tab',tabWrap).forEach(x=>x.classList.remove('active')); btn.classList.add('active'); renderWorks(); document.getElementById('works').scrollIntoView({behavior:'smooth'}); };
+        btn.onclick = ()=>{
+          state.filter = name; 
+          $$('.tab',tabWrap).forEach(x=>x.classList.remove('active')); btn.classList.add('active'); 
+          renderWorks(); 
+          const works = document.getElementById('works');
+          works.scrollIntoView({behavior:'smooth'});
+          // 헤더 높이만큼 상단을 조금 올려 첫 카드가 잘리지 않게 조정
+          setTimeout(()=>{ window.scrollBy({top:-90, left:0, behavior:'smooth'}); }, 250);
+        };
         tabWrap.appendChild(btn);
         if(i===0) state.filter = name;
       });
@@ -307,21 +330,24 @@
       grid.innerHTML=''; outsourceWrap.innerHTML='';
       const chosen = CATEGORY_MAP[state.filter] || null;
 
-      if(chosen === '촬영 외주'){
+      if(chosen === '예능 촬영'){
         renderOutsource(outsourceWrap);
         return;
       }
       const filtered = PROJECTS.filter(p => !chosen || (p.category===chosen));
+      // 강의 카테고리 프로모 패널
+      if(chosen === '강의'){
+        grid.appendChild(buildPromo());
+      }
       filtered.forEach(p=>grid.appendChild(buildCard(p)));
       if(filtered.length===0){ const msg=document.createElement('div'); msg.className='panel'; msg.textContent='해당 카테고리의 작품이 아직 없습니다.'; grid.appendChild(msg);}    
     }
 
     function renderOutsource(wrap){
       // client별 그룹핑
-      const list = PROJECTS.filter(p=>p.category==='촬영 외주');
+      const list = PROJECTS.filter(p=>p.category==='예능 촬영');
       const byClient = {};
       list.forEach(p=>{ (byClient[p.client] ||= []).push(p); });
-      // 각 클라이언트 내부 역순(요청) 유지: 이미 목록을 역순으로 입력했으므로 그대로 사용
       Object.keys(byClient).forEach(client=>{
         const section = document.createElement('section'); section.className='client-section';
         const header = document.createElement('div'); header.className='client-header';
@@ -345,10 +371,20 @@
       return card;
     }
 
+    function buildPromo(){
+      const box=document.createElement('div'); box.className='promo-panel';
+      const left=document.createElement('div'); left.className='left';
+      const badge=document.createElement('span'); badge.className='promo-badge'; badge.textContent='임팩트서클';
+      const title=document.createElement('span'); title.className='promo-title'; title.textContent='impactcircle.co.kr/course 전편 제작';
+      left.appendChild(badge); left.appendChild(title);
+      const a=document.createElement('a'); a.className='promo-cta'; a.href='https://www.impactcircle.co.kr/course'; a.target='_blank'; a.rel='noopener'; a.textContent='전체 강의 보러가기 ↗';
+      box.appendChild(left); box.appendChild(a);
+      return box;
+    }
+
     function buildCard(p){
       const card = document.createElement('article');
       card.className = 'card';
-      // Media
       const media = document.createElement('div'); media.className='thumb';
       let content;
       if(p.youtubeId){
@@ -356,15 +392,26 @@
         yt.src = `https://www.youtube.com/embed/${p.youtubeId}`; yt.title=p.title; yt.frameBorder='0';
         yt.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'; yt.referrerPolicy='strict-origin-when-cross-origin'; yt.allowFullscreen=true;
         content = yt;
+      } else if(p.link && /instagram\.com\//.test(p.link)){
+        // Instagram 공식 임베드
+        content = document.createElement('div');
+        const bq = document.createElement('blockquote');
+        bq.className = 'instagram-media';
+        bq.setAttribute('data-instgrm-permalink', p.link);
+        bq.setAttribute('data-instgrm-version','14');
+        bq.style.cssText = 'background:#0f1115; margin:0 auto;';
+        content.appendChild(bq);
+        ensureInstagramScript();
       } else if(p.videoSrc){
         const v=document.createElement('video'); v.src=p.videoSrc; v.controls=true; v.playsInline=true; v.preload='metadata'; if(p.thumb) v.poster=p.thumb; content=v;
+      } else if(p.link){
+        const box=document.createElement('div'); box.style.cssText='width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#0f1115;color:#a7adbb;font-size:13px'; box.textContent='외부 링크'; content=box;
       } else {
         const img=document.createElement('img'); img.src=p.thumb||''; img.alt=p.title; content=img;
       }
       media.appendChild(content);
       const badge=document.createElement('div'); badge.className='badge'; badge.textContent=((p.category||'')+ (p.year?` • ${p.year}`:'' )).toUpperCase(); media.appendChild(badge);
 
-      // Meta
       const meta=document.createElement('div'); meta.className='meta';
       const t=document.createElement('div'); t.className='title'; t.textContent=p.title; meta.appendChild(t);
       const rows=document.createElement('div'); rows.className='rows';
@@ -372,12 +419,38 @@
         <div class="row"><span>CLIENT</span></div><div class="row"><b>${p.client||'-'}</b></div>
         <div class="row"><span>CATEGORY</span></div><div class="row"><b>${p.category}</b></div>
         <div class="row"><span>YEAR</span></div><div class="row"><b>${p.year || '-'}</b></div>
+        ${p.role?`<div class=\"row\"><span>ROLE</span></div><div class=\"row\"><b>${p.role}</b></div>`:''}
       `;
       meta.appendChild(rows);
+      if(p.link && !/instagram\.com\//.test(p.link)){
+        const cta = document.createElement('a'); cta.href=p.link; cta.target='_blank'; cta.rel='noopener'; cta.textContent='바로 보기 ↗'; cta.style='margin-top:8px;color:#9ae6ff;font-weight:700'; meta.appendChild(cta);
+      }
 
       card.appendChild(media); card.appendChild(meta);
       return card;
     }
+
+    function ensureInstagramScript(){
+      if(document.getElementById('instgrm-embed-js')) return;
+      const s=document.createElement('script'); s.id='instgrm-embed-js'; s.src='https://www.instagram.com/embed.js'; s.async=true; document.body.appendChild(s);
+      s.onload = ()=>{ if(window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process(); };
+    }
+
+    // ====== 4) 간단 런타임 테스트 (콘솔) ======
+    (function testSuite(){
+      try{
+        // 카테고리 매핑 존재 여부
+        PROFILE.categories.forEach(c=>{
+          console.assert(!!CATEGORY_MAP[c], `CATEGORY_MAP 누락: ${c}`);
+        });
+        // 필수 함수 호출 예외 여부
+        console.assert(typeof renderWorks === 'function', 'renderWorks 없음');
+        console.assert(typeof renderOutsource === 'function', 'renderOutsource 없음');
+        console.log('[Self-Test] 기본 점검 통과');
+      }catch(e){
+        console.error('[Self-Test] 실패', e);
+      }
+    })();
 
     init();
   </script>
