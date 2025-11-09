@@ -1,4 +1,8 @@
-<!doctype html>
+let filtered = PROJECTS.filter(p => !chosen || (p.category===chosen));
+      // 행사 스케치만 연도 오름차순으로 정렬(요청 기준: 2023 다음에 2024 신규 배치)
+      if(chosen === '행사 스케치'){
+        filtered = filtered.sort((a,b)=> (a.year||0) - (b.year||0));
+      }<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
@@ -61,6 +65,12 @@
     /* spacing tweak */
     #about{margin-top:72px}
 
+    /* About with photo */
+    .about-grid{display:grid;grid-template-columns:320px 1fr;gap:18px;align-items:start}
+    .about-photo img{width:100%;height:auto;display:block;border-radius:12px}
+    @media (max-width: 960px){.about-grid{grid-template-columns:1fr}}
+
+
     /* 강의 카테고리 프로모 패널 */
     .promo-panel{grid-column:span 12;background:linear-gradient(180deg,#11141a,#10131a);border:1px solid #2b3140;border-radius:16px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
     .promo-panel .left{display:flex;align-items:center;gap:10px}
@@ -85,7 +95,7 @@
       .mini-card{grid-column:span 6}
     }
     @media (max-width: 520px){
-      .mini-card{grid-column:span 12}
+      .mini-card{grid-column:span 3}
     }
 
     /* Typography compact for About & Gear */
@@ -96,6 +106,23 @@
     .about-single .panel{padding:16px 18px}
     .panel ul{margin-left:0}
     .panel ul li{padding-left:0}
+      /* ===== Mobile compact 4-up ===== */
+    @media (max-width: 520px){
+      .logo{white-space:nowrap}
+      .logo h1{font-size:13px}
+      .links a{font-size:12px}
+
+      .grid{grid-template-columns:repeat(4,1fr);gap:8px}
+      .card{grid-column:span 1;display:block;min-height:auto;border-radius:12px}
+      .card .thumb{aspect-ratio:16/9}
+      .card .meta{padding:6px 4px}
+      .card .rows{display:none}
+      .card .title{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+      .badge{top:6px;left:6px;padding:4px 6px;font-size:9px}
+
+      /* 예능 촬영 미니 카드도 4-up 유지 */
+      .mini-card{grid-column:span 3}
+    }
   </style>
 </head>
 <body>
@@ -127,44 +154,64 @@
 
     <section id="about" class="section about-single">
       <h2>About</h2>
-      <div class="panel">
-        <b>프로필 • 경력 요약</b>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
-          <div>
-            <b>경력 (5년 이상)</b>
-            <ul>
-              <li>서울영상미디어센터 (2018.12 - 2019.01)</li>
-              <li>그린웹서비스 (2019.09 - 2020.06)</li>
-              <li>머스타드임팩트 (2020.08 - 2023.12)</li>
-              <li>화목스튜디오 (2024.01 - 현재)</li>
-            </ul>
-            <b style="display:block;margin-top:10px">학력</b>
-            <ul>
-              <li>동아방송예술대학교 영상제작과 — 졸업(2020.02, 초대졸)</li>
-              <li>학점: 3.97 / 4.5</li>
-            </ul>
-          </div>
-          <div>
-            <b>자격증</b>
-            <ul>
-              <li>2종 보통 운전면허 (경기지방경찰청)</li>
-              <li>GTQ(포토샵) (한국생산성본부)</li>
-              <li>ITQ(한글) (한국생산성본부)</li>
-              <li>정보처리기능사 (한국산업인력공단)</li>
-              <li>영상촬영 2급 자격 (한국영상인자격협회)</li>
-              <li>무인동력비행장치 4종 (한국교통안전공단)</li>
-              <li>사진기능사 (한국산업인력공단)</li>
-            </ul>
-            <b style="display:block;margin-top:10px">군대</b>
-            <ul>
-              <li>의무경찰 영상 특기병 (2015.10 - 2017.07)</li>
-            </ul>
+      <div class="about-grid">
+        <div class="panel about-photo">
+          <img src="about.jpg" alt="정성구 프로필 사진" onerror="this.style.display='none'">
+          <p style="color:#a7adbb;margin:8px 0 0;font-size:12px">사진이 보이지 않으면 리포지토리에 <b>about.jpg</b>를 업로드하세요. (루트 경로)</p>
+        </div>
+        <div class="panel">
+          <b>프로필 • 경력 요약</b>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+            <div>
+              <b>경력 (5년 이상)</b>
+              <ul>
+                <li>서울영상미디어센터 (2018.12 - 2019.01)</li>
+                <li>그린웹서비스 (2019.09 - 2020.06)</li>
+                <li>머스타드임팩트 (2020.08 - 2023.12)</li>
+                <li>화목스튜디오 (2024.01 - 현재)</li>
+              </ul>
+              <b style="display:block;margin-top:10px">학력</b>
+              <ul>
+                <li>동아방송예술대학교 영상제작과 — 졸업(2020.02, 초대졸)</li>
+                <li>학점: 3.97 / 4.5</li>
+              </ul>
+            </div>
+            <div>
+              <b>자격증</b>
+              <ul>
+                <li>2종 보통 운전면허 (경기지방경찰청)</li>
+                <li>GTQ(포토샵) (한국생산성본부)</li>
+                <li>ITQ(한글) (한국생산성본부)</li>
+                <li>정보처리기능사 (한국산업인력공단)</li>
+                <li>영상촬영 2급 자격 (한국영상인자격협회)</li>
+                <li>무인동력비행장치 4종 (한국교통안전공단)</li>
+                <li>사진기능사 (한국산업인력공단)</li>
+              </ul>
+              <b style="display:block;margin-top:10px">군대</b>
+              <ul>
+                <li>의무경찰 영상 특기병 (2015.10 - 2017.07)</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <section id="contact" class="section">
+      <h2>Gear & Contact</h2>
+      <div class="twocol">
+        <div class="panel">
+          <ul id="gearList"></ul>
+        </div>
+        <div class="panel">
+          <p style="color:#a7adbb;margin:0 0 10px">프로젝트 문의는 아래 채널로 연락 주세요.</p>
+          <ul style="list-style:none;padding-left:0;margin:0;white-space:nowrap">
+            <li><b>이메일</b> · <a href="#" id="emailText">seong8389@naver.com</a></li>
+            <li style="margin-top:6px"><b>전화</b> · <span id="phoneText">+82-2076-8389</span></li>
+          </ul>
+        </div>
+      </div>
+    </section> class="section">
       <h2>Gear & Contact</h2>
       <div class="twocol">
         <div class="panel">
@@ -277,6 +324,11 @@
       {title:'[덕심 튜토리얼 빵편] 🍞 빵덕후들의 맛있는 토크😋 빵지순례 썰부터 빵 시식까지', client:'현대해상', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'tJJ669OpnzQ'},
       {title:'The new E-Class 디젤 vs 가솔린 아옳이의 선택은?ㅣ한성 드라이브 EP.1', client:'한성자동차', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'7tqSNa_qWdc'},
       {title:'한성자동차 일일 사원이 된 미미미누?!ㅣ엔조이 한성 EP.1', client:'한성자동차', agency:'The SMC', category:'예능 촬영', year:2024, youtubeId:'ZzUkamco5XY'}
+    ,
+      // 추가: 예능 촬영 2025 교보문고 편
+      {title:'광희x창윤 교보문고 급습!?📚🏃‍♂️ 이번에는 건강티칭 군만두고 보장찾기 ㄱㄱ😎 [건강보장구역 EP.5 교보문고 편]', client:'교보생명', agency:'The SMC', category:'예능 촬영', year:2025, role:'촬영감독', youtubeId:'76WrBF0YIpk'},
+      // 추가: 행사 스케치 2024 우리 모모콘 (연도순 정렬 고려)
+      {title:'우리의 선한 마음이 가득 모인, 2024 우리 모모콘 현장✨| 우리금융그룹', client:'우리금융그룹', agency:'The SMC', category:'행사 스케치', year:2024, role:'스케치 촬영감독', youtubeId:'0Fy_veK8GZc'}
     ];
 
     // ====== 3) 렌더링 ======
